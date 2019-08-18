@@ -1,53 +1,20 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-
-const graphqlHTTP = require("express-graphql");
+import locationSchema from "./schema";
+import locationResolver from "./resolvers";
+import { makeExecutableSchema } from "graphql-tools";
 require("dotenv").config();
+const { ApolloServer } = require("apollo-server");
 
-const app = express();
-const port = process.env.PORT || 5000;
-var { buildSchema } = require("graphql");
+console.log("location", locationSchema);
 
-// Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-// The root provides a resolver function for each API endpoint
-var root = {
-  hello: () => {
-    return "Hello world!";
-  }
-};
-
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    rootValue: root,
-    graphiql: true
-  })
-);
-
-app.use(cors());
-app.use(express.json());
-
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
-const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("MongoDB database connection established successfully");
+const schema = makeExecutableSchema({
+  typeDefs: locationSchema,
+  resolvers: locationResolver
 });
 
-const exercisesRouter = require("./routes/exercises");
-const usersRouter = require("./routes/users");
+const server = new ApolloServer({ schema });
 
-app.use("/exercises", exercisesRouter);
-app.use("/users", usersRouter);
-
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+// This `listen` method launches a web-server.  Existing apps
+// can utilize middleware options, which we'll discuss later.
+server.listen().then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
 });

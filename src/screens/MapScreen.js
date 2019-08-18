@@ -1,6 +1,6 @@
 import React from "react";
-import Map from "../components/Map/Map";
+import MapExample from "../components/Map/Map";
 
 export default function MapScreen() {
-  return <Map />;
+  return <MapExample />;
 }
