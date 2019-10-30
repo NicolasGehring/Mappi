@@ -1,7 +1,11 @@
 export default {
   Query: {
     location: async (obj, args, context, info) => {
-      return { text: "IT worked", description: "What up?" };
+      return {
+        text: "It worked and I#m happy",
+        description: "What up?",
+        test: "test"
+      };
       /*       console.log(context);
       return await context.models.User.findById(args.id);
  */

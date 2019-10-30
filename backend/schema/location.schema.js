@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-export const typeDefs = `
+export const typeDefs = gql`
   type Query {
     location(id: ID!): Location!
   }
