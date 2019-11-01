@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import Location from "./models/location.model";
 
 const connectDb = () => {
-  console.log("running");
   const {
     MONGO_USERNAME,
     MONGO_PASSWORD,
@@ -35,8 +33,4 @@ const connectDb = () => {
   }
 };
 
-const models = { Location };
-
 export { connectDb };
-
-export default models;

@@ -7,7 +7,6 @@ require("dotenv").config();
 
 //Connect to Database Instance.
 connectDb();
-console.log(process.env.MONGO_USERNAME);
 
 const schema = makeExecutableSchema({
   typeDefs: locationSchema,
@@ -20,8 +19,8 @@ const port = process.env.PORT || 4000;
 const options = {
   port: port
 };
-// This `listen` method launches a web-server.  Existing apps
-// can utilize middleware options, which we'll discuss later.
+// This `listen` method launches a web-server
 server.listen(options).then(({ url }) => {
   console.log(`🚀 Server running at ${url}`);
 });
+

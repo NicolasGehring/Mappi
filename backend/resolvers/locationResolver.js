@@ -1,6 +1,10 @@
+import { createNewRoom, deleteRoomByName } from "../Services/RoomServices";
+
 export default {
   Query: {
     location: async (obj, args, context, info) => {
+      createNewRoom("test1");
+      deleteRoomByName("test");
       return {
         text: "It worked and I#m happy",
         description: "What up?",
@@ -46,5 +50,5 @@ export default {
       { login, password },
       { models, secret }
     
-    ) => {} }*/
+    ) => {} } */
 };
