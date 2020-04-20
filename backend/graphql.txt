@@ -1,0 +1,6 @@
+mutation createLocation{
+	createLocation(name: "test", lat: 1.2,long: 1.5 ){name}
+}
+
+
+query location {location(long: 1.5, lat:1.2){name}}

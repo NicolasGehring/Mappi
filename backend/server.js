@@ -1,5 +1,6 @@
-import locationSchema from "./schema";
-import locationResolver from "./resolvers";
+import schemas from "./schemas";
+import resolvers from "./resolvers";
+
 import { makeExecutableSchema } from "graphql-tools";
 import { ApolloServer } from "apollo-server";
 import { connectDb } from "./db/db";
@@ -9,8 +10,8 @@ require("dotenv").config();
 connectDb();
 
 const schema = makeExecutableSchema({
-  typeDefs: locationSchema,
-  resolvers: locationResolver
+  typeDefs: schemas,
+  resolvers: resolvers
 });
 
 const server = new ApolloServer({ schema });
@@ -23,4 +24,3 @@ const options = {
 server.listen(options).then(({ url }) => {
   console.log(`🚀 Server running at ${url}`);
 });
-

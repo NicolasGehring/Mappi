@@ -1,5 +1,5 @@
-import roomModel from "./models/room.model";
+import locationModel from "./models/location.model";
 
-const models = { roomModel };
+const models = { locationModel };
 
 export default models;

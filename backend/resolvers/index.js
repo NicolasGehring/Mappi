@@ -1,3 +1,3 @@
-import locationResolver from "./locationResolver";
+import locationResolver from "./location.resolver";
 
 export default [locationResolver];
