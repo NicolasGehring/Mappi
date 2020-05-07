@@ -4,9 +4,9 @@ import MapScreen from "./screens/MapScreen";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloProvider } from "@apollo/react-hooks";
-
+import { ThemeProvider } from "@material-ui/core/styles";
 import { HttpLink } from "apollo-link-http";
-import gql from "graphql-tag";
+import theme from "./styles/theme";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -19,22 +19,13 @@ const client = new ApolloClient({
 });
 
 function App() {
-  client
-    .query({
-      query: gql`
-        query location {
-          location(long: 1.5, lat: 1.2) {
-            name
-          }
-        }
-      `,
-    })
-    .then((result) => console.log("test", result));
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Route path="/" exact component={MapScreen} />
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Route path="/" exact component={MapScreen} />
+        </Router>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
