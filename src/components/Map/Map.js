@@ -1,37 +1,25 @@
 import React from "react";
-import { Popup, Map, TileLayer, Marker } from "react-leaflet";
-export default function MapExample() {
-  const position = [48.505, 11.09];
-  return (
-    <Map center={position} zoom={13}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup.
-          <br />
-          Easily customizable.
-        </Popup>
-      </Marker>
-    </Map>
-  );
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
 
-  /* render() {
-    const position = [this.state.lat, this.state.lng];
-    return (
-      <Map center={position} zoom={this.state.zoom}>
-        <TileLayer
-          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      </Map>
-    );
-  } */
+const LOCATION = gql`
+  query location {
+    location(long: 1.5, lat: 1.2) {
+      id
+      name
+    }
+  }
+`;
+export default function MapExample() {
+  const { loading, error, data } = useQuery(LOCATION);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :</p>;
+  return (
+    <div>
+      {data.location.map((i) => {
+        return <p key={i.id}>{i.name}</p>;
+      })}
+    </div>
+  );
 }

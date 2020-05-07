@@ -9,6 +9,7 @@ export const typeDefs = gql`
     deleteLocation(id: ID!): Boolean!
   }
   type Location {
+    id: ID!
     name: String!
     long: Float!
     lat: Float!
