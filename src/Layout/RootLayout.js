@@ -6,26 +6,21 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useTheme } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing,
-  },
   title: {
     flexGrow: 1,
   },
 }));
+
 function RootLayout({ children }) {
   const classes = useStyles();
-  const theme = useTheme();
-  console.log(theme);
-
   return (
-    <div className={classes.root}>
+    <>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -42,8 +37,9 @@ function RootLayout({ children }) {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      <Paper elevation={2}></Paper>
       {children}
-    </div>
+    </>
   );
 }
 

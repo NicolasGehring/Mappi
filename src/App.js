@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MapScreen from "./screens/MapScreen";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -7,6 +7,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { HttpLink } from "apollo-link-http";
 import theme from "./styles/theme";
+import IntroScreen from "./screens/IntroScreen";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -23,7 +24,10 @@ function App() {
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <Router>
-          <Route path="/" exact component={MapScreen} />
+          <Switch>
+            <Route path="/" exact component={IntroScreen} />
+            <Route path="/map" exact component={MapScreen} />
+          </Switch>
         </Router>
       </ThemeProvider>
     </ApolloProvider>
